@@ -1,0 +1,40 @@
+from fpdf import FPDF
+
+# Crear instancia de FPDF
+pdf = FPDF()
+pdf.set_auto_page_break(auto=True, margin=15)
+pdf.add_page()
+pdf.set_font("Arial", size=12)
+
+# Título
+pdf.set_font("Arial", style="B", size=14)
+pdf.cell(200, 10, txt="Listado de Atractivos Turísticos Naturales de Chiapas", ln=True, align='C')
+pdf.ln(10)
+
+# Encabezado de la tabla
+pdf.set_font("Arial", style="B", size=12)
+pdf.cell(95, 10, txt="Subcategoría", border=1, align='C')
+pdf.cell(95, 10, txt="Nombre", border=1, align='C')
+pdf.ln()
+
+# Contenido de la tabla
+pdf.set_font("Arial", size=12)
+data = [
+    ("Cañones", "Cañón del Sumidero"),
+    ("Cascadas", "Cascadas de Agua Azul, Cascadas del Chiflón, El Chorreadero"),
+    ("Lagos y Lagunas", "Lagos de Montebello"),
+    ("Grutas y Cavernas", "Grutas de Rancho Nuevo, Grutas del Mamut"),
+    ("Ríos", "Río Grijalva, Río Usumacinta"),
+    ("Cenotes", "Cenote Chucumaltik"),
+    ("Reservas Naturales", "Reserva de la Biosfera Montes Azules, Reserva El Ocote"),
+    ("Selvas y Bosques", "Selva Lacandona"),
+]
+
+for subcategory, name in data:
+    pdf.cell(95, 10, txt=subcategory, border=1)
+    pdf.cell(95, 10, txt=name, border=1)
+    pdf.ln()
+
+# Guardar PDF
+pdf_file = "Listado_Atractivos_Naturales_Chiapas.pdf"
+pdf.output(pdf_file)
